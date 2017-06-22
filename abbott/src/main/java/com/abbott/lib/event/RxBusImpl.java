@@ -32,16 +32,16 @@ public class RxBusImpl implements IBus {
     }
 
     @Override
-    public void post(IEvent event) {
+    public void post(IBaseResponse event) {
         bus.onNext(event);
     }
 
     @Override
-    public void postSticky(IEvent event) {
+    public void postSticky(IBaseResponse event) {
 
     }
 
-    public <T extends IEvent> Flowable<T> toFlowable(Class<T> eventType) {
+    public <T extends IBaseResponse> Flowable<T> toFlowable(Class<T> eventType) {
         return bus.ofType(eventType).onBackpressureBuffer();
     }
 

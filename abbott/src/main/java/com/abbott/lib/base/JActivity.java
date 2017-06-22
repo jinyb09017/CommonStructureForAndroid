@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.abbott.lib.event.IBaseResponse;
 import com.abbott.lib.impl.IActivityDelegate;
 import com.abbott.lib.impl.UIModule;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -82,10 +83,11 @@ public abstract class JActivity extends RxAppCompatActivity implements UIModule 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    private void onMessageEvent(){
-
+    public void onMessageEvent(IBaseResponse baseResponse) {
+        onReceive(baseResponse);
     }
-    protected void onReceive() {
+
+    protected void onReceive(IBaseResponse baseResponse) {
 
     }
 

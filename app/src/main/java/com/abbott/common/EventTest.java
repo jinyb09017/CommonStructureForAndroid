@@ -3,9 +3,11 @@ package com.abbott.common;
 import android.os.Bundle;
 import android.view.View;
 
+import com.abbott.common.event.FriendsModuleCode;
 import com.abbott.lib.base.JActivity;
+import com.abbott.lib.event.BaseResonse;
 import com.abbott.lib.event.BusProvider;
-import com.abbott.lib.event.IBus;
+import com.abbott.lib.event.IBaseResponse;
 import com.abbott.lib.log.XLog;
 
 /**
@@ -22,30 +24,14 @@ public class EventTest extends JActivity {
         findById(R.id.ll).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                XLog.d("click","parent");
+                XLog.d("click", "parent");
 
-                BusProvider.getBus().post(new IBus.IEvent() {
-                    @Override
-                    public int getTag() {
-                        return 100;
-                    }
-                });
+                BusProvider.getBus().post(new BaseResonse(FriendsModuleCode.open));
             }
 
 
         });
-//        findById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                XLog.d("click","btn");
-//            }
-//        });
-//        findById(R.id.tv).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                XLog.d("click","tv");
-//            }
-//        });
+
 
 
     }
@@ -65,5 +51,10 @@ public class EventTest extends JActivity {
         return R.layout.test;
     }
 
-
+    @Override
+    protected void onReceive(IBaseResponse baseResponse) {
+        if (baseResponse.getCmd() == FriendsModuleCode.open) {
+            XLog.d("event",baseResponse.getCmd()+ "");
+        }
+    }
 }

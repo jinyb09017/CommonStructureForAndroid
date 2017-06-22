@@ -28,12 +28,12 @@ public class EventBusImpl implements IBus {
     }
 
     @Override
-    public void post(IEvent event) {
+    public void post(IBaseResponse event) {
         EventBus.getDefault().post(event);
     }
 
     @Override
-    public void postSticky(IEvent event) {
+    public void postSticky(IBaseResponse event) {
         EventBus.getDefault().postSticky(event);
     }
 

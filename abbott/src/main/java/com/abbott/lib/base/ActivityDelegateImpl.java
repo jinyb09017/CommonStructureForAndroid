@@ -7,8 +7,6 @@ import com.abbott.lib.event.BusProvider;
 import com.abbott.lib.impl.IActivityDelegate;
 import com.abbott.lib.log.XLog;
 
-import org.greenrobot.eventbus.EventBus;
-
 /**
  * @author jyb jyb_96@sina.com on 2017/6/20.
  * @version V1.0
@@ -49,7 +47,7 @@ public class ActivityDelegateImpl implements IActivityDelegate {
     @Override
     public void onStart() {
         XLog.d(tag, getLogMsg("onStart"));
-        BusProvider.getBus().register(this);
+        BusProvider.getBus().register(jActivity != null ? jActivity : fragment);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class ActivityDelegateImpl implements IActivityDelegate {
     @Override
     public void onStop() {
         XLog.d(tag, getLogMsg("onStop"));
-        EventBus.getDefault().unregister(this);
+        BusProvider.getBus().unregister(jActivity != null ? jActivity : fragment);
     }
 
     @Override
