@@ -1,7 +1,13 @@
 package com.abbott.lib.base;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+
+import com.abbott.lib.event.BusProvider;
 import com.abbott.lib.impl.IActivityDelegate;
 import com.abbott.lib.log.XLog;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author jyb jyb_96@sina.com on 2017/6/20.
@@ -12,16 +18,27 @@ import com.abbott.lib.log.XLog;
  */
 
 public class ActivityDelegateImpl implements IActivityDelegate {
-    public JActivity jActivity;
+    public FragmentActivity jActivity;
+    public Fragment fragment;
     private String tag = "activity-life";
 
-    public ActivityDelegateImpl(JActivity aty) {
+    public ActivityDelegateImpl(FragmentActivity aty) {
         this.jActivity = aty;
     }
 
-    public static IActivityDelegate create(JActivity aty) {
+    public ActivityDelegateImpl(Fragment fragment) {
+        this.fragment = fragment;
+    }
+
+
+    public static IActivityDelegate create(Fragment fragment) {
+        return new ActivityDelegateImpl(fragment);
+    }
+
+    public static IActivityDelegate create(FragmentActivity aty) {
         return new ActivityDelegateImpl(aty);
     }
+
 
     @Override
     public void onCreate() {
@@ -32,6 +49,7 @@ public class ActivityDelegateImpl implements IActivityDelegate {
     @Override
     public void onStart() {
         XLog.d(tag, getLogMsg("onStart"));
+        BusProvider.getBus().register(this);
     }
 
     @Override
@@ -47,6 +65,7 @@ public class ActivityDelegateImpl implements IActivityDelegate {
     @Override
     public void onStop() {
         XLog.d(tag, getLogMsg("onStop"));
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -54,13 +73,12 @@ public class ActivityDelegateImpl implements IActivityDelegate {
         XLog.d(tag, getLogMsg("onDestroy"));
     }
 
-    public static String getCurrentClassAndMethodNames() {
-        final StackTraceElement e = Thread.currentThread().getStackTrace()[2];
-        final String s = e.getClassName();
-        return s.substring(s.lastIndexOf('.') + 1, s.length()) + "." + e.getMethodName();
-    }
+
 
     public String getLogMsg(String state) {
-        return jActivity.getClass() + "-" + state;
+
+
+        return jActivity != null ? jActivity.getClass() + "-" + state : fragment.getClass() + "-" + state;
+
     }
 }

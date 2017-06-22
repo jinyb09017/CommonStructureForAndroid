@@ -36,4 +36,13 @@ public class EventBusImpl implements IBus {
     public void postSticky(IEvent event) {
         EventBus.getDefault().postSticky(event);
     }
+
+    private static class Holder {
+        private static final EventBusImpl instance = new EventBusImpl();
+    }
+
+    public static EventBusImpl get() {
+        return Holder.instance;
+    }
+
 }

@@ -2,9 +2,14 @@ package com.abbott.lib.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.abbott.lib.impl.IActivityDelegate;
+import com.abbott.lib.impl.UIModule;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @author jyb jyb_96@sina.com on 2017/6/20.
@@ -14,13 +19,23 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
  * @copyright www.tops001.com
  */
 
-public abstract class JActivity extends RxAppCompatActivity {
+public abstract class JActivity extends RxAppCompatActivity implements UIModule {
     private IActivityDelegate mActivityDelegateImpl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         getActivityDelegate().onCreate();
+        if (getLayoutId() > 0) {
+            setContentView(getLayoutId());
+        }
+
+        initView(getWindow().getDecorView());
+        initData(savedInstanceState);
+        setListener();
+
     }
 
     @Override
@@ -66,7 +81,16 @@ public abstract class JActivity extends RxAppCompatActivity {
         return mActivityDelegateImpl;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    private void onMessageEvent(){
+
+    }
     protected void onReceive() {
 
+    }
+
+    protected <T extends View> T findById(int id) {
+        T t = (T) findViewById(id);
+        return t;
     }
 }

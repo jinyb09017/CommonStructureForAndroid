@@ -50,4 +50,26 @@ public class MainActivity extends JActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void initView(View view) {
+
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+
 }
