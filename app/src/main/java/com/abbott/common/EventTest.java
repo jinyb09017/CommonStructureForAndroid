@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.abbott.common.event.FriendsModuleCode;
 import com.abbott.lib.base.JActivity;
-import com.abbott.lib.event.BaseResonse;
+import com.abbott.lib.event.BaseResponse;
 import com.abbott.lib.event.BusProvider;
 import com.abbott.lib.event.IBaseResponse;
 import com.abbott.lib.log.XLog;
@@ -26,7 +26,9 @@ public class EventTest extends JActivity {
             public void onClick(View v) {
                 XLog.d("click", "parent");
 
-                BusProvider.getBus().post(new BaseResonse(FriendsModuleCode.open));
+                BusProvider.getBus().post(new BaseResponse(FriendsModuleCode.open));
+
+                findById(R.id.atv).invalidate();
             }
 
 

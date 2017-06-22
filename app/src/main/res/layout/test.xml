@@ -22,4 +22,22 @@
         android:padding="10dp"
         android:clickable="true"
         android:text="click me" />
+
+    <com.abbott.lib.widget.AlignTextView
+        android:id="@+id/atv"
+        android:layout_margin="15dp"
+        android:textSize="20sp"
+        android:background="@android:color/white"
+        android:text="“近几年hmWgj是技术密集爆发的临界点，abcdef this is a good test.we like it过程中，智能化在各行业的应用将催生新的业态形式。”6月21日，在2017机器人与人工智能大会上，赛迪顾问股份有限公司总裁孙会峰表示，“在这个背景下，两大领域持续受到关注与热捧，一个是人工智能一个是机器人。”"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_margin="15dp"
+        android:textSize="20sp"
+        android:background="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:text="“近几年hmWgj是技术密集爆发的临界点，abcdef this is a good test.we like it过程中，智能化在各行业的应用将催生新的业态形式。”6月21日，在2017机器人与人工智能大会上，赛迪顾问股份有限公司总裁孙会峰表示，“在这个背景下，两大领域持续受到关注与热捧，一个是人工智能一个是机器人。”"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </com.abbott.common.widget.MyCustomeLayout>

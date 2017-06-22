@@ -8,12 +8,12 @@ package com.abbott.lib.event;
  * @copyright www.tops001.com
  */
 
-public class BaseResonse<T> implements IBaseResponse {
+public class BaseResponse<T> implements IBaseResponse {
     private String msg;
     private int cmd;
     private T data;
 
-    public BaseResonse(int cmd) {
+    public BaseResponse(int cmd) {
         this.cmd = cmd;
     }
 
